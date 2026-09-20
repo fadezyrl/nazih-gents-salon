@@ -133,7 +133,6 @@ export const Team = (): ReactElement => {
           ref={trackRef}
           className="team__grid"
           aria-label={team.sliderLabel}
-          tabIndex={isMobile ? 0 : undefined}
         >
           {teamMembers.map((member, index) => {
             const copy = team.members[member.id];
