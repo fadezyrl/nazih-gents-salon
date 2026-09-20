@@ -1,0 +1,30 @@
+@media (max-width: 1024px) {
+  .experience {
+    padding: 100px 0;
+    min-height: auto;
+  }
+
+  .experience__word {
+    font-size: min(96px, calc((100vw - (2 * var(--edge))) / 7.4));
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .experience {
+    padding: 80px 0;
+  }
+
+  .experience__word {
+    font-size: min(56px, calc((100vw - (2 * var(--edge))) / 7.2));
+    line-height: 1.05;
+  }
+
+  .experience__foot {
+    margin-top: 40px;
+  }
+
+  .experience__copy {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,142 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: var(--charcoal);
+  color: var(--ivory);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  overflow: hidden;
+}
+
+.hero__photo {
+  position: relative;
+  min-height: 100%;
+}
+
+.hero__photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--charcoal) 0%, transparent 22%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px var(--edge) 80px;
+}
+
+.hero__since {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--champagne);
+  margin-bottom: 28px;
+}
+
+.hero__title {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(40px, 7.4vw, 108px);
+  line-height: 0.94;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.hero__tagline {
+  margin-top: 36px;
+  font-weight: 300;
+  font-size: clamp(17px, 1.6vw, 21px);
+  line-height: 1.5;
+  color: rgba(244, 241, 235, 0.86);
+  max-width: 360px;
+}
+
+.hero__ctas {
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  flex-wrap: wrap;
+}
+
+.btn-solid {
+  background: var(--ivory);
+  color: var(--charcoal);
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
+  padding: 17px 32px;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+  display: inline-block;
+}
+
+.btn-solid:hover {
+  background: var(--champagne);
+  transform: translateY(-2px);
+}
+
+.link-underline {
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
+  color: var(--ivory);
+  border-bottom: 1px solid rgba(244, 241, 235, 0.4);
+  padding-bottom: 4px;
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.link-underline:hover {
+  border-color: var(--champagne);
+  color: var(--champagne);
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 34px;
+  left: var(--edge);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: rgba(244, 241, 235, 0.45);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero__scroll-line {
+  width: 34px;
+  height: 1px;
+  background: rgba(244, 241, 235, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: "";
+  position: absolute;
+  left: -100%;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: var(--champagne);
+  animation: scrollline 2.4s ease-in-out infinite;
+}
+
+@keyframes scrollline {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 0;
+  }
+  100% {
+    left: 100%;
+  }
+}

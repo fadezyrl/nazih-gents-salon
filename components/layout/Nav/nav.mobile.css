@@ -1,0 +1,41 @@
+@media (max-width: 1024px) {
+  .nav__links {
+    display: none;
+  }
+
+  .nav__cta {
+    display: none;
+  }
+
+  .nav__mobile-btn {
+    display: flex;
+  }
+
+  .mobile-menu__close {
+    right: var(--edge);
+  }
+
+  [dir="rtl"] .mobile-menu__close {
+    right: auto;
+    left: var(--edge);
+  }
+}
+
+@media (max-width: 640px) {
+  .nav {
+    padding: 20px var(--edge);
+  }
+
+  .nav.solid {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .mobile-menu {
+    gap: 22px;
+  }
+
+  .mobile-menu a {
+    font-size: clamp(28px, 8vw, 34px);
+  }
+}

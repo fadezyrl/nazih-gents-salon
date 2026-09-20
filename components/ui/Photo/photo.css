@@ -1,0 +1,56 @@
+.photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  background:
+    repeating-linear-gradient(
+      115deg,
+      rgba(244, 241, 235, 0.05) 0px,
+      rgba(244, 241, 235, 0.05) 1px,
+      transparent 1px,
+      transparent 14px
+    ),
+    linear-gradient(155deg, #2c3946 0%, #1a232b 55%, #11171c 100%);
+  overflow: hidden;
+}
+
+.photo--media {
+  min-height: 0;
+}
+
+.photo.light {
+  background:
+    repeating-linear-gradient(
+      115deg,
+      rgba(33, 43, 52, 0.05) 0px,
+      rgba(33, 43, 52, 0.05) 1px,
+      transparent 1px,
+      transparent 14px
+    ),
+    linear-gradient(155deg, #e5e0d3 0%, #d8d2c1 60%, #cfc7b2 100%);
+}
+
+.photo__tag {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.06em;
+  color: rgba(244, 241, 235, 0.4);
+}
+
+.photo.light .photo__tag {
+  color: rgba(33, 43, 52, 0.4);
+}
+
+.photo__img {
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(0.4) contrast(1.06) brightness(0.9);
+}
+
+.photo.light .photo__img {
+  filter: grayscale(0.25) contrast(1.04) brightness(0.95);
+}

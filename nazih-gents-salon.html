@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nazih Gents Salon — Since 1980</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   NGS — DESIGN TOKENS
+   ========================================================================== */
+:root{
+  --charcoal:#212B34;
+  --deep:#11171C;
+  --ivory:#F4F1EB;
+  --white:#FFFFFF;
+  --champagne:#B79A6A;
+  --warm-gray:#A7A39C;
+
+  --display: 'Archivo', sans-serif;
+  --body: 'Inter', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+
+  --edge: clamp(24px, 6vw, 88px);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--ivory);
+  color:var(--charcoal);
+  font-family:var(--body);
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;border:none;background:none;cursor:pointer;}
+
+::selection{background:var(--champagne);color:var(--deep);}
+
+:focus-visible{
+  outline:2px solid var(--champagne);
+  outline-offset:3px;
+}
+
+.wrap{padding-left:var(--edge);padding-right:var(--edge);}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.14em;
+  color:var(--warm-gray);
+}
+
+.rule{
+  height:1px;
+  background:rgba(33,43,52,0.14);
+  width:100%;
+}
+.rule--light{background:rgba(244,241,235,0.18);}
+.rule--champagne{background:var(--champagne);}
+
+/* placeholder photography panels — honest, textured, labeled */
+.photo{
+  position:relative;
+  background:
+    repeating-linear-gradient(115deg, rgba(244,241,235,0.05) 0px, rgba(244,241,235,0.05) 1px, transparent 1px, transparent 14px),
+    linear-gradient(155deg,#2c3946 0%, #1a232b 55%, #11171C 100%);
+  overflow:hidden;
+}
+.photo.light{
+  background:
+    repeating-linear-gradient(115deg, rgba(33,43,52,0.05) 0px, rgba(33,43,52,0.05) 1px, transparent 1px, transparent 14px),
+    linear-gradient(155deg,#e5e0d3 0%, #d8d2c1 60%, #cfc7b2 100%);
+}
+.photo__tag{
+  position:absolute;
+  bottom:14px;
+  left:16px;
+  font-family:var(--mono);
+  font-size:9.5px;
+  letter-spacing:0.06em;
+  color:rgba(244,241,235,0.4);
+}
+.photo.light .photo__tag{color:rgba(33,43,52,0.4);}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+}
+
+/* ==========================================================================
+   NAV
+   ========================================================================== */
+.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:26px var(--edge);
+  transition:background 0.5s ease, padding 0.4s ease, border-color 0.5s ease;
+  border-bottom:1px solid transparent;
+}
+.nav.solid{
+  background:var(--charcoal);
+  padding-top:18px;
+  padding-bottom:18px;
+  border-bottom-color:rgba(244,241,235,0.08);
+}
+.nav__logo{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:20px;
+  letter-spacing:0.08em;
+  color:var(--ivory);
+}
+.nav__links{
+  display:flex;
+  gap:40px;
+  list-style:none;
+}
+.nav__links a{
+  font-size:13px;
+  letter-spacing:0.04em;
+  color:rgba(244,241,235,0.78);
+  position:relative;
+  padding-bottom:4px;
+}
+.nav__links a::after{
+  content:'';
+  position:absolute;
+  left:0;bottom:0;
+  width:0;height:1px;
+  background:var(--champagne);
+  transition:width 0.35s ease;
+}
+.nav__links a:hover::after{width:100%;}
+.nav__cta{
+  font-size:12px;
+  letter-spacing:0.08em;
+  color:var(--ivory);
+  border:1px solid rgba(244,241,235,0.4);
+  padding:11px 22px;
+  transition:border-color 0.3s ease, color 0.3s ease;
+}
+.nav__cta:hover{border-color:var(--champagne); color:var(--champagne);}
+.nav__mobile-btn{display:none;flex-direction:column;gap:5px;width:26px;}
+.nav__mobile-btn span{height:1px;background:var(--ivory);width:100%;}
+
+.mobile-menu{
+  position:fixed;inset:0;
+  background:var(--deep);
+  z-index:150;
+  display:flex;flex-direction:column;
+  justify-content:center;
+  padding:var(--edge);
+  gap:28px;
+  transform:translateY(-100%);
+  transition:transform 0.5s cubic-bezier(.6,0,.2,1);
+}
+.mobile-menu.open{transform:translateY(0);}
+.mobile-menu a{
+  font-family:var(--display);
+  font-size:34px;
+  font-weight:700;
+  color:var(--ivory);
+}
+.mobile-menu__close{
+  position:absolute;top:26px;right:var(--edge);
+  color:var(--ivory);
+  font-size:14px;
+  letter-spacing:0.1em;
+}
+
+/* ==========================================================================
+   01 — HERO
+   ========================================================================== */
+.hero{
+  position:relative;
+  min-height:100vh;
+  background:var(--charcoal);
+  color:var(--ivory);
+  display:grid;
+  grid-template-columns:1.1fr 0.9fr;
+  overflow:hidden;
+}
+.hero__photo{
+  position:relative;
+}
+.hero__photo::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(90deg, var(--charcoal) 0%, transparent 22%);
+}
+.hero__content{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:120px var(--edge) 80px;
+}
+.hero__since{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.2em;
+  color:var(--champagne);
+  margin-bottom:28px;
+}
+.hero__title{
+  font-family:var(--display);
+  font-weight:900;
+  font-size:clamp(52px, 7.4vw, 108px);
+  line-height:0.94;
+  letter-spacing:-0.01em;
+}
+.hero__tagline{
+  margin-top:36px;
+  font-weight:300;
+  font-size:clamp(17px,1.6vw,21px);
+  line-height:1.5;
+  color:rgba(244,241,235,0.86);
+  max-width:360px;
+}
+.hero__ctas{
+  margin-top:56px;
+  display:flex;
+  align-items:center;
+  gap:36px;
+  flex-wrap:wrap;
+}
+.btn-solid{
+  background:var(--ivory);
+  color:var(--charcoal);
+  font-size:12.5px;
+  letter-spacing:0.1em;
+  padding:17px 32px;
+  transition:background 0.3s ease, transform 0.3s ease;
+  display:inline-block;
+}
+.btn-solid:hover{background:var(--champagne); transform:translateY(-2px);}
+.link-underline{
+  font-size:12.5px;
+  letter-spacing:0.1em;
+  color:var(--ivory);
+  border-bottom:1px solid rgba(244,241,235,0.4);
+  padding-bottom:4px;
+  transition:border-color 0.3s ease, color 0.3s ease;
+}
+.link-underline:hover{border-color:var(--champagne); color:var(--champagne);}
+
+.hero__scroll{
+  position:absolute;
+  bottom:34px;left:var(--edge);
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.14em;
+  color:rgba(244,241,235,0.45);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.hero__scroll-line{
+  width:34px;height:1px;
+  background:rgba(244,241,235,0.45);
+  position:relative;
+  overflow:hidden;
+}
+.hero__scroll-line::after{
+  content:'';
+  position:absolute;left:-100%;top:0;bottom:0;width:100%;
+  background:var(--champagne);
+  animation:scrollline 2.4s ease-in-out infinite;
+}
+@keyframes scrollline{
+  0%{left:-100%;}
+  50%{left:0;}
+  100%{left:100%;}
+}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;}
+  .hero__photo{min-height:38vh;order:2;}
+  .hero__photo::before{background:linear-gradient(0deg, var(--charcoal) 0%, transparent 30%);}
+  .hero__content{order:1;padding-top:150px;}
+}
+
+/* ==========================================================================
+   02 — HERITAGE
+   ========================================================================== */
+.heritage{
+  position:relative;
+  background:var(--ivory);
+  padding:180px 0 160px;
+  overflow:hidden;
+}
+.heritage__numeral{
+  font-family:var(--display);
+  font-weight:900;
+  font-size:clamp(220px, 34vw, 560px);
+  line-height:0.8;
+  color:transparent;
+  -webkit-text-stroke:1.4px rgba(33,43,52,0.16);
+  letter-spacing:-0.02em;
+  position:relative;
+  left:calc(var(--edge) * -0.4);
+  user-select:none;
+}
+.heritage__body{
+  margin-top:-9vw;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  padding:0 var(--edge);
+  position:relative;
+  z-index:2;
+}
+.heritage__eyebrow{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.14em;
+  color:var(--champagne);
+  margin-bottom:22px;
+}
+.heritage__lead{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(24px,2.4vw,34px);
+  line-height:1.32;
+  max-width:520px;
+}
+.heritage__col-right{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  align-items:flex-start;
+}
+.heritage__copy{
+  font-size:16px;
+  line-height:1.75;
+  color:#4b5560;
+  max-width:400px;
+}
+.heritage__strip{
+  margin-top:110px;
+  padding:0 var(--edge);
+  display:grid;
+  grid-template-columns:1.4fr 0.8fr 1fr;
+  gap:1px;
+  background:rgba(33,43,52,0.1);
+}
+.heritage__strip .photo{height:260px;}
+
+@media (max-width:900px){
+  .heritage{padding:120px 0 110px;}
+  .heritage__body{grid-template-columns:1fr;margin-top:-30vw;gap:34px;}
+  .heritage__numeral{font-size:44vw;left:calc(var(--edge) * -0.6);}
+  .heritage__strip{grid-template-columns:1fr;margin-top:70px;}
+  .heritage__strip .photo{height:200px;}
+}
+
+/* ==========================================================================
+   03 — SIGNATURE GROOMING
+   ========================================================================== */
+.grooming{
+  background:var(--charcoal);
+  color:var(--ivory);
+  padding:150px 0 80px;
+}
+.grooming__head{
+  padding:0 var(--edge);
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  margin-bottom:90px;
+  gap:30px;
+  flex-wrap:wrap;
+}
+.grooming__title{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:clamp(34px,4vw,58px);
+  letter-spacing:-0.01em;
+}
+.grooming__note{
+  font-size:14px;
+  color:var(--warm-gray);
+  max-width:280px;
+  line-height:1.6;
+  text-align:right;
+}
+
+.service-row{
+  position:relative;
+  border-top:1px solid rgba(244,241,235,0.14);
+  padding:0 var(--edge);
+}
+.service-row:last-child{border-bottom:1px solid rgba(244,241,235,0.14);}
+.service-row__inner{
+  display:grid;
+  grid-template-columns:60px 1fr auto;
+  align-items:center;
+  gap:32px;
+  padding:38px 0;
+  position:relative;
+}
+.service-row__num{
+  font-family:var(--mono);
+  font-size:13px;
+  color:var(--champagne);
+}
+.service-row__name{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:clamp(34px,5vw,72px);
+  letter-spacing:-0.01em;
+  transition:transform 0.45s cubic-bezier(.2,.8,.2,1), color 0.45s ease;
+}
+.service-row__desc{
+  font-size:14px;
+  line-height:1.6;
+  color:var(--warm-gray);
+  max-width:230px;
+  text-align:right;
+}
+.service-row__preview{
+  position:absolute;
+  top:50%;right:calc(var(--edge) + 220px);
+  transform:translateY(-50%) scale(0.9);
+  width:200px;height:130px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.4s ease, transform 0.5s cubic-bezier(.2,.8,.2,1);
+  z-index:3;
+}
+.service-row:hover .service-row__preview{opacity:1; transform:translateY(-50%) scale(1);}
+.service-row:hover .service-row__name{transform:translateX(14px); color:var(--champagne);}
+
+@media (max-width:900px){
+  .service-row__inner{grid-template-columns:36px 1fr;row-gap:14px;padding:28px 0;}
+  .service-row__desc{grid-column:2/3; text-align:left; max-width:none;}
+  .service-row__preview{display:none;}
+  .grooming__head{margin-bottom:60px;}
+  .grooming__note{text-align:left;}
+}
+
+/* ==========================================================================
+   04 — THE NGS EXPERIENCE
+   ========================================================================== */
+.experience{
+  position:relative;
+  background:var(--deep);
+  color:var(--ivory);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  padding:120px 0;
+}
+.experience__photo{
+  position:absolute;
+  inset:0;
+  opacity:0.55;
+}
+.experience__photo::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(17,23,28,0.4) 0%, rgba(17,23,28,0.92) 100%);
+}
+.experience__words{
+  position:relative;
+  z-index:2;
+  width:100%;
+  padding:0 var(--edge);
+}
+.experience__word{
+  font-family:var(--display);
+  font-weight:900;
+  letter-spacing:-0.01em;
+  line-height:0.98;
+  font-size:clamp(46px, 8vw, 128px);
+}
+.experience__word:nth-child(1){text-align:left; margin-left:0;}
+.experience__word:nth-child(2){text-align:center; color:var(--champagne); opacity:0.94;}
+.experience__word:nth-child(3){text-align:right;}
+.experience__foot{
+  margin-top:64px;
+  display:flex;
+  justify-content:center;
+}
+.experience__copy{
+  max-width:460px;
+  text-align:center;
+  font-size:15.5px;
+  line-height:1.75;
+  color:rgba(244,241,235,0.72);
+}
+
+@media (max-width:900px){
+  .experience__word{font-size:15vw;}
+  .experience{padding:100px 0;}
+}
+
+/* ==========================================================================
+   05 — LOCATIONS
+   ========================================================================== */
+.locations{
+  background:var(--ivory);
+  padding:160px 0 120px;
+}
+.locations__head{
+  padding:0 var(--edge);
+  margin-bottom:100px;
+}
+.locations__title{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:clamp(34px,4.4vw,64px);
+  letter-spacing:-0.01em;
+}
+.locations__list{
+  padding:0 var(--edge);
+}
+.location-item{
+  border-top:1px solid rgba(33,43,52,0.16);
+  padding:46px 0;
+  display:grid;
+  grid-template-columns:2fr 1.3fr 1fr auto;
+  gap:30px;
+  align-items:start;
+}
+.location-item:last-child{border-bottom:1px solid rgba(33,43,52,0.16);}
+.location-item__index{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--champagne);
+  display:block;
+  margin-bottom:10px;
+}
+.location-item__city{
+  font-family:var(--display);
+  font-weight:800;
+  font-size:clamp(30px,3.4vw,48px);
+  letter-spacing:-0.01em;
+}
+.location-item__label{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:0.1em;
+  color:var(--warm-gray);
+  margin-bottom:8px;
+}
+.location-item__text{
+  font-size:14.5px;
+  line-height:1.65;
+  color:#4b5560;
+}
+.location-item__link{
+  font-size:12px;
+  letter-spacing:0.06em;
+  border-bottom:1px solid var(--champagne);
+  padding-bottom:3px;
+  white-space:nowrap;
+  align-self:end;
+  justify-self:end;
+}
+
+@media (max-width:900px){
+  .location-item{grid-template-columns:1fr;gap:16px;}
+  .location-item__link{justify-self:start;}
+  .locations__head{margin-bottom:60px;}
+}
+
+/* ==========================================================================
+   06 — TESTIMONIAL
+   ========================================================================== */
+.testimonial{
+  background:var(--charcoal);
+  color:var(--ivory);
+  padding:200px var(--edge);
+  display:flex;
+  justify-content:center;
+}
+.testimonial__inner{
+  max-width:900px;
+  position:relative;
+}
+.testimonial__mark{
+  font-family:var(--display);
+  font-weight:900;
+  font-size:120px;
+  color:var(--champagne);
+  line-height:0.5;
+  opacity:0.85;
+}
+.testimonial__quote{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:clamp(26px,3.2vw,44px);
+  line-height:1.4;
+  letter-spacing:-0.005em;
+  margin-top:20px;
+}
+.testimonial__attrib{
+  margin-top:44px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+.testimonial__attrib-line{width:40px;height:1px;background:var(--champagne);}
+.testimonial__attrib-name{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.1em;
+  color:var(--warm-gray);
+}
+
+@media (max-width:900px){
+  .testimonial{padding:130px 26px;}
+  .testimonial__mark{font-size:80px;}
+}
+
+/* ==========================================================================
+   07 — BOOK / CONTACT + FOOTER
+   ========================================================================== */
+.closing{
+  background:var(--ivory);
+  padding:170px var(--edge) 130px;
+}
+.closing__title{
+  font-family:var(--display);
+  font-weight:900;
+  font-size:clamp(46px,7vw,104px);
+  line-height:0.98;
+  letter-spacing:-0.01em;
+  max-width:900px;
+}
+.closing__cta-row{
+  margin-top:52px;
+  display:flex;
+  align-items:center;
+  gap:34px;
+  flex-wrap:wrap;
+}
+.btn-dark{
+  background:var(--charcoal);
+  color:var(--ivory);
+  font-size:12.5px;
+  letter-spacing:0.1em;
+  padding:19px 36px;
+  display:inline-block;
+  transition:background 0.3s ease, transform 0.3s ease;
+}
+.btn-dark:hover{background:var(--deep); transform:translateY(-2px);}
+
+.contact-grid{
+  margin-top:130px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:rgba(33,43,52,0.14);
+}
+.contact-cell{
+  background:var(--ivory);
+  padding:42px 34px;
+}
+.contact-cell__city{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:20px;
+  margin-bottom:18px;
+}
+.contact-cell dl{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:8px 16px;
+}
+.contact-cell dt{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.08em;
+  color:var(--champagne);
+  align-self:start;
+  padding-top:2px;
+}
+.contact-cell dd{
+  font-size:13.5px;
+  line-height:1.6;
+  color:#4b5560;
+}
+
+@media (max-width:900px){
+  .contact-grid{grid-template-columns:1fr;}
+}
+
+footer{
+  background:var(--deep);
+  color:var(--ivory);
+  padding:70px var(--edge) 34px;
+}
+.footer__top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  gap:50px;
+  padding-bottom:56px;
+}
+.footer__brand-name{
+  font-family:var(--display);
+  font-weight:900;
+  font-size:28px;
+  letter-spacing:0.02em;
+}
+.footer__since{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--warm-gray);
+  margin-top:8px;
+  letter-spacing:0.08em;
+}
+.footer__cols{
+  display:flex;
+  gap:80px;
+  flex-wrap:wrap;
+}
+.footer__col-title{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:0.1em;
+  color:var(--champagne);
+  margin-bottom:16px;
+}
+.footer__col a, .footer__col span{
+  display:block;
+  font-size:13.5px;
+  color:rgba(244,241,235,0.75);
+  margin-bottom:10px;
+}
+.footer__col a:hover{color:var(--champagne);}
+.footer__bottom{
+  padding-top:26px;
+  display:flex;
+  justify-content:space-between;
+  font-size:11.5px;
+  color:rgba(244,241,235,0.4);
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+@media (max-width:900px){
+  .footer__top{gap:40px;}
+  .footer__cols{gap:44px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================== NAV ============================== -->
+<nav class="nav" id="nav">
+  <div class="nav__logo">NGS</div>
+  <ul class="nav__links">
+    <li><a href="#grooming">Grooming</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#locations">Locations</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav__cta">BOOK APPOINTMENT</a>
+  <button class="nav__mobile-btn" id="mobileBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu__close" id="mobileClose">CLOSE</button>
+  <a href="#grooming">Grooming</a>
+  <a href="#experience">Experience</a>
+  <a href="#locations">Locations</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ============================== 01 HERO ============================== -->
+<section class="hero">
+  <div class="hero__content">
+    <div class="hero__since">SINCE&nbsp;1980</div>
+    <h1 class="hero__title">NAZIH<br>GENTS SALON</h1>
+    <p class="hero__tagline">Expert grooming.<br>Modern care.</p>
+    <div class="hero__ctas">
+      <a href="#contact" class="btn-solid">BOOK AN APPOINTMENT</a>
+      <a href="#grooming" class="link-underline">EXPLORE GROOMING</a>
+    </div>
+  </div>
+  <div class="hero__photo photo">
+    <span class="photo__tag">PHOTOGRAPHY — barber, precision cut, close crop</span>
+  </div>
+  <div class="hero__scroll"><span>SCROLL</span><span class="hero__scroll-line"></span></div>
+</section>
+
+<!-- ============================== 02 HERITAGE ============================== -->
+<section class="heritage">
+  <div class="heritage__numeral">1980</div>
+  <div class="heritage__body">
+    <div>
+      <div class="heritage__eyebrow">NGS HERITAGE</div>
+      <p class="heritage__lead">Four decades of craft, carried forward without losing what made it matter.</p>
+    </div>
+    <div class="heritage__col-right">
+      <p class="heritage__copy">For over four decades, Nazih Gents Salon has built its reputation around men's grooming — combining traditional expertise with modern care, across a growing network in the UAE.</p>
+    </div>
+  </div>
+  <div class="heritage__strip">
+    <div class="photo"><span class="photo__tag">Archival — original salon interior, 1980s</span></div>
+    <div class="photo light"><span class="photo__tag">Detail — grooming tools</span></div>
+    <div class="photo"><span class="photo__tag">Portrait — barber at work</span></div>
+  </div>
+</section>
+
+<!-- ============================== 03 SIGNATURE GROOMING ============================== -->
+<section class="grooming" id="grooming">
+  <div class="grooming__head">
+    <h2 class="grooming__title">Signature<br>Grooming</h2>
+    <p class="grooming__note">A concise menu of the services NGS is known for — each one refined over four decades.</p>
+  </div>
+
+  <div class="service-row">
+    <div class="service-row__inner">
+      <span class="service-row__num">01</span>
+      <span class="service-row__name">Haircuts</span>
+      <span class="service-row__desc">Precision cuts.<br>Modern styling.</span>
+      <div class="service-row__preview photo"><span class="photo__tag">Close-up — scissor work</span></div>
+    </div>
+  </div>
+  <div class="service-row">
+    <div class="service-row__inner">
+      <span class="service-row__num">02</span>
+      <span class="service-row__name">Beard</span>
+      <span class="service-row__desc">Defined shaping.<br>Refined finishes.</span>
+      <div class="service-row__preview photo"><span class="photo__tag">Close-up — beard shaping</span></div>
+    </div>
+  </div>
+  <div class="service-row">
+    <div class="service-row__inner">
+      <span class="service-row__num">03</span>
+      <span class="service-row__name">Facial</span>
+      <span class="service-row__desc">Advanced care.<br>Fresh, balanced skin.</span>
+      <div class="service-row__preview photo"><span class="photo__tag">Treatment — facial care</span></div>
+    </div>
+  </div>
+  <div class="service-row">
+    <div class="service-row__inner">
+      <span class="service-row__num">04</span>
+      <span class="service-row__name">Moroccan Bath</span>
+      <span class="service-row__desc">A traditional ritual.<br>Reimagined for modern care.</span>
+      <div class="service-row__preview photo"><span class="photo__tag">Ritual — Moroccan bath</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 04 THE NGS EXPERIENCE ============================== -->
+<section class="experience" id="experience">
+  <div class="experience__photo photo"><span class="photo__tag">Interior — premium salon environment</span></div>
+  <div class="experience__words">
+    <div class="experience__word">PRECISION.</div>
+    <div class="experience__word">COMFORT.</div>
+    <div class="experience__word">TRADITION.</div>
+    <div class="experience__foot">
+      <p class="experience__copy">Experienced professionals, a premium environment, and attention to detail — traditional expertise, carried into modern care.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 05 LOCATIONS ============================== -->
+<section class="locations" id="locations">
+  <div class="locations__head">
+    <h2 class="locations__title">Find your NGS</h2>
+  </div>
+  <div class="locations__list">
+    <div class="location-item">
+      <div>
+        <span class="location-item__index">01 — UAE</span>
+        <div class="location-item__city">Dubai</div>
+      </div>
+      <div>
+        <div class="location-item__label">ADDRESS</div>
+        <p class="location-item__text">[Street, Area], Dubai, UAE</p>
+      </div>
+      <div>
+        <div class="location-item__label">HOURS</div>
+        <p class="location-item__text">Daily — 10:00 to 22:00</p>
+      </div>
+      <a href="#" class="location-item__link">DIRECTIONS →</a>
+    </div>
+    <div class="location-item">
+      <div>
+        <span class="location-item__index">02 — UAE</span>
+        <div class="location-item__city">Sharjah</div>
+      </div>
+      <div>
+        <div class="location-item__label">ADDRESS</div>
+        <p class="location-item__text">[Street, Area], Sharjah, UAE</p>
+      </div>
+      <div>
+        <div class="location-item__label">HOURS</div>
+        <p class="location-item__text">Daily — 10:00 to 22:00</p>
+      </div>
+      <a href="#" class="location-item__link">DIRECTIONS →</a>
+    </div>
+    <div class="location-item">
+      <div>
+        <span class="location-item__index">03 — UAE</span>
+        <div class="location-item__city">Ras Al Khaimah</div>
+      </div>
+      <div>
+        <div class="location-item__label">ADDRESS</div>
+        <p class="location-item__text">[Street, Area], Ras Al Khaimah, UAE</p>
+      </div>
+      <div>
+        <div class="location-item__label">HOURS</div>
+        <p class="location-item__text">Daily — 10:00 to 22:00</p>
+      </div>
+      <a href="#" class="location-item__link">DIRECTIONS →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 06 TESTIMONIAL ============================== -->
+<section class="testimonial">
+  <div class="testimonial__inner">
+    <div class="testimonial__mark">“</div>
+    <p class="testimonial__quote">I've had my haircut here for years — it's the only place that gets it right every single time, without me having to explain a thing.</p>
+    <!-- Placeholder quote — replace with a verified client testimonial before launch -->
+    <div class="testimonial__attrib">
+      <span class="testimonial__attrib-line"></span>
+      <span class="testimonial__attrib-name">NGS CLIENT</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 07 BOOK / CONTACT + FOOTER ============================== -->
+<section class="closing" id="contact">
+  <h2 class="closing__title">Your next<br>grooming<br>starts here.</h2>
+  <div class="closing__cta-row">
+    <a href="#" class="btn-dark">BOOK AN APPOINTMENT</a>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-cell">
+      <div class="contact-cell__city">Dubai</div>
+      <dl>
+        <dt>ADDR</dt><dd>[Street, Area], Dubai, UAE</dd>
+        <dt>TEL</dt><dd>+971 4 [XXX XXXX]</dd>
+        <dt>MAIL</dt><dd>dubai@nazihgents.ae</dd>
+        <dt>HRS</dt><dd>Daily, 10:00–22:00</dd>
+      </dl>
+    </div>
+    <div class="contact-cell">
+      <div class="contact-cell__city">Sharjah</div>
+      <dl>
+        <dt>ADDR</dt><dd>[Street, Area], Sharjah, UAE</dd>
+        <dt>TEL</dt><dd>+971 6 [XXX XXXX]</dd>
+        <dt>MAIL</dt><dd>sharjah@nazihgents.ae</dd>
+        <dt>HRS</dt><dd>Daily, 10:00–22:00</dd>
+      </dl>
+    </div>
+    <div class="contact-cell">
+      <div class="contact-cell__city">Ras Al Khaimah</div>
+      <dl>
+        <dt>ADDR</dt><dd>[Street, Area], Ras Al Khaimah, UAE</dd>
+        <dt>TEL</dt><dd>+971 7 [XXX XXXX]</dd>
+        <dt>MAIL</dt><dd>rak@nazihgents.ae</dd>
+        <dt>HRS</dt><dd>Daily, 10:00–22:00</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer__top">
+    <div>
+      <div class="footer__brand-name">NGS</div>
+      <div class="footer__since">SINCE 1980</div>
+    </div>
+    <div class="footer__cols">
+      <div class="footer__col">
+        <div class="footer__col-title">NAVIGATION</div>
+        <a href="#grooming">Grooming</a>
+        <a href="#experience">Experience</a>
+        <a href="#locations">Locations</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">LOCATIONS</div>
+        <span>Dubai</span>
+        <span>Sharjah</span>
+        <span>Ras Al Khaimah</span>
+      </div>
+      <div class="footer__col">
+        <div class="footer__col-title">CONNECT</div>
+        <a href="#">Instagram</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="rule rule--light"></div>
+  <div class="footer__bottom">
+    <span>© 2026 Nazih Gents Salon. All rights reserved.</span>
+    <span>Expert grooming. Modern care.</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+// Nav solid on scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 60);
+});
+
+// Mobile menu
+const mobileBtn = document.getElementById('mobileBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileClose = document.getElementById('mobileClose');
+mobileBtn.addEventListener('click', () => mobileMenu.classList.add('open'));
+mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+// GSAP entrance + scroll reveals (graceful degradation if GSAP fails to load)
+try{
+  gsap.registerPlugin(ScrollTrigger);
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(!reduce){
+    // Hero load sequence — one orchestrated moment
+    gsap.timeline({defaults:{ease:'power3.out'}})
+      .from('.hero__since', {opacity:0, y:14, duration:0.7})
+      .from('.hero__title', {opacity:0, y:30, duration:0.9}, '-=0.45')
+      .from('.hero__tagline', {opacity:0, y:20, duration:0.8}, '-=0.55')
+      .from('.hero__ctas', {opacity:0, y:16, duration:0.7}, '-=0.5')
+      .from('.hero__photo', {opacity:0, duration:1.2}, 0);
+
+    // Heritage numeral parallax
+    gsap.to('.heritage__numeral', {
+      x:-60, ease:'none',
+      scrollTrigger:{trigger:'.heritage', start:'top bottom', end:'bottom top', scrub:1}
+    });
+    gsap.from('.heritage__body > div', {
+      opacity:0, y:40, duration:1, stagger:0.15,
+      scrollTrigger:{trigger:'.heritage__body', start:'top 80%'}
+    });
+    gsap.from('.heritage__strip .photo', {
+      opacity:0, y:30, duration:0.8, stagger:0.12,
+      scrollTrigger:{trigger:'.heritage__strip', start:'top 85%'}
+    });
+
+    // Service rows reveal
+    gsap.from('.service-row', {
+      opacity:0, y:24, duration:0.7, stagger:0.1,
+      scrollTrigger:{trigger:'.grooming', start:'top 70%'}
+    });
+
+    // Experience words
+    gsap.from('.experience__word', {
+      opacity:0, x:(i)=> i===2 ? 60 : -60, duration:1, stagger:0.15,
+      scrollTrigger:{trigger:'.experience', start:'top 65%'}
+    });
+    gsap.from('.experience__copy', {
+      opacity:0, y:20, duration:0.8,
+      scrollTrigger:{trigger:'.experience__foot', start:'top 90%'}
+    });
+
+    // Locations
+    gsap.from('.location-item', {
+      opacity:0, y:24, duration:0.7, stagger:0.12,
+      scrollTrigger:{trigger:'.locations__list', start:'top 80%'}
+    });
+
+    // Testimonial
+    gsap.from('.testimonial__mark, .testimonial__quote, .testimonial__attrib', {
+      opacity:0, y:24, duration:0.9, stagger:0.1,
+      scrollTrigger:{trigger:'.testimonial', start:'top 70%'}
+    });
+
+    // Closing
+    gsap.from('.closing__title', {opacity:0, y:30, duration:1, scrollTrigger:{trigger:'.closing', start:'top 75%'}});
+    gsap.from('.contact-cell', {
+      opacity:0, y:20, duration:0.7, stagger:0.1,
+      scrollTrigger:{trigger:'.contact-grid', start:'top 85%'}
+    });
+  }
+}catch(e){
+  // GSAP unavailable — content remains fully visible and functional without motion.
+  console.warn('Animation layer unavailable, degrading gracefully.', e);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+@media (max-width: 1024px) {
+  .locations {
+    padding: 120px 0 96px;
+  }
+
+  .locations__head {
+    margin-bottom: 60px;
+  }
+
+  .location-item {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 28px;
+  }
+
+  .location-item > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  .location-item__link {
+    justify-self: start;
+    align-self: start;
+  }
+
+  [dir="rtl"] .location-item__link {
+    justify-self: end;
+  }
+}
+
+@media (max-width: 640px) {
+  .locations {
+    padding: 96px 0 72px;
+  }
+
+  .locations__head {
+    margin-bottom: 40px;
+  }
+
+  .location-item {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 32px 0;
+  }
+
+  .location-item > :first-child {
+    grid-column: auto;
+  }
+
+  .location-item__city {
+    font-size: clamp(26px, 8vw, 40px);
+    overflow-wrap: anywhere;
+  }
+}

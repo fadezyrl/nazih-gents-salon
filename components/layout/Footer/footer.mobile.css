@@ -1,0 +1,36 @@
+@media (max-width: 1024px) {
+  .footer__top {
+    gap: 40px;
+  }
+
+  .footer__cols {
+    gap: 44px;
+  }
+}
+
+@media (max-width: 640px) {
+  footer {
+    padding: 56px var(--edge) 28px;
+  }
+
+  .footer__top {
+    gap: 36px;
+    padding-bottom: 40px;
+  }
+
+  .footer__cols {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 24px;
+  }
+
+  .footer__col:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
