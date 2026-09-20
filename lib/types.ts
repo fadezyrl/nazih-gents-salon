@@ -88,6 +88,10 @@ export type Dictionary = {
     titleLine1: string;
     titleLine2: string;
     note: string;
+    sliderLabel: string;
+    slideStatus: string;
+    prev: string;
+    next: string;
     members: {
       member01: { name: string; role: string; photoTag: string };
       member02: { name: string; role: string; photoTag: string };

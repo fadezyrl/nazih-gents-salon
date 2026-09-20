@@ -81,6 +81,10 @@ export const en: Dictionary = {
     titleLine1: "Our",
     titleLine2: "Team",
     note: "The people behind every cut, shape, and finish — experienced, precise, and devoted to the craft.",
+    sliderLabel: "Team members",
+    slideStatus: "{current} / {total}",
+    prev: "Previous artist",
+    next: "Next artist",
     members: {
       member01: {
         name: "Nazih",

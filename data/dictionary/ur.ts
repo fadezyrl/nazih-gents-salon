@@ -81,6 +81,10 @@ export const ur: Dictionary = {
     titleLine1: "ہماری",
     titleLine2: "ٹیم",
     note: "ہر کٹ، شیپ اور فنش کے پیچھے لوگ — تجربہ کار، درست، اور اپنے فن کے لیے وقف۔",
+    sliderLabel: "ٹیم ممبران",
+    slideStatus: "{current} / {total}",
+    prev: "پچھلا آرٹسٹ",
+    next: "اگلا آرٹسٹ",
     members: {
       member01: {
         name: "نزہ",

@@ -102,78 +102,15 @@
 }
 
 .locations-panel__body {
-  display: grid;
-  grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.4fr);
-  gap: clamp(28px, 4vw, 56px);
-  align-items: stretch;
+  display: block;
   min-height: 480px;
-}
-
-.locations-panel__info {
-  display: flex;
-  flex-direction: column;
-  padding: 12px 0 8px;
-}
-
-.locations-panel__index {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  color: var(--champagne);
-  margin-bottom: 14px;
-}
-
-.locations-panel__city {
-  font-family: var(--display);
-  font-weight: 800;
-  font-size: clamp(32px, 3.6vw, 52px);
-  letter-spacing: -0.01em;
-  margin-bottom: 32px;
-}
-
-.locations-panel__details {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 14px 18px;
-  margin-bottom: 36px;
-}
-
-.locations-panel__details dt {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: var(--champagne);
-  padding-top: 3px;
-}
-
-.locations-panel__details dd {
-  font-size: 14px;
-  line-height: 1.65;
-  color: #4b5560;
-}
-
-.locations-panel__directions {
-  margin-top: auto;
-  align-self: flex-start;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: var(--charcoal);
-  border-bottom: 1px solid var(--champagne);
-  padding-bottom: 4px;
-  transition:
-    color 0.3s ease,
-    border-color 0.3s ease;
-}
-
-.locations-panel__directions:hover {
-  color: var(--champagne);
 }
 
 .locations-map {
   position: relative;
   overflow: hidden;
   background: var(--charcoal);
-  min-height: 420px;
+  min-height: 480px;
   isolation: isolate;
 }
 

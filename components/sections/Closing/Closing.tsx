@@ -18,7 +18,7 @@ export const Closing = (): ReactElement => {
 
   const activeLocation =
     locations.find((location) => location.id === activeId) ?? locations[0];
-  const activeContact = closing.contacts[activeLocation.id];
+  const activeCity = closing.contacts[activeLocation.id].city;
   const mapSrc = buildMapEmbedUrl(
     activeLocation.lat,
     activeLocation.lng,
@@ -42,7 +42,12 @@ export const Closing = (): ReactElement => {
         </a>
       </ScrollReveal>
 
-      <ScrollReveal className="locations-panel" id="locations" variant="fade-up" delay={100}>
+      <ScrollReveal
+        className="locations-panel"
+        id="locations"
+        variant="fade-up"
+        delay={100}
+      >
         <div className="locations-panel__head">
           <h3 className="locations-panel__title">{locationsCopy.title}</h3>
           <div
@@ -77,41 +82,14 @@ export const Closing = (): ReactElement => {
           id={`location-panel-${activeLocation.id}`}
           aria-labelledby={`location-tab-${activeLocation.id}`}
         >
-          <div className="locations-panel__info">
-            <span className="locations-panel__index">
-              {locationsCopy.items[activeLocation.id].index}
-            </span>
-            <div className="locations-panel__city">{activeContact.city}</div>
-
-            <dl className="locations-panel__details">
-              <dt>{closing.contactLabels.addr}</dt>
-              <dd>{activeContact.address}</dd>
-              <dt>{closing.contactLabels.tel}</dt>
-              <dd>{activeContact.phone}</dd>
-              <dt>{closing.contactLabels.mail}</dt>
-              <dd>{activeContact.email}</dd>
-              <dt>{closing.contactLabels.hrs}</dt>
-              <dd>{activeContact.hours}</dd>
-            </dl>
-
-            <a
-              href={activeLocation.directionsHref}
-              className="locations-panel__directions"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {locationsCopy.directions}
-            </a>
-          </div>
-
           <div
             className="locations-map"
-            aria-label={`${locationsCopy.mapLabel} — ${activeContact.city}`}
+            aria-label={`${locationsCopy.mapLabel} — ${activeCity}`}
           >
             <div className="locations-map__frame">
               <iframe
                 key={activeLocation.id}
-                title={`${locationsCopy.mapLabel} — ${activeContact.city}`}
+                title={`${locationsCopy.mapLabel} — ${activeCity}`}
                 src={mapSrc}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
