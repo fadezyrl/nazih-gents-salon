@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactElement } from "react";
+import { ScrollReveal } from "@/components/ui/ScrollReveal/ScrollReveal";
 import { useLocale } from "@/context/useLocale";
 import {
   buildMapEmbedUrl,
@@ -26,20 +27,22 @@ export const Closing = (): ReactElement => {
 
   return (
     <section className="closing" id="contact" aria-labelledby="closing-title">
-      <h2 className="closing__title" id="closing-title">
-        {closing.titleLine1}
-        <br />
-        {closing.titleLine2}
-        <br />
-        {closing.titleLine3}
-      </h2>
-      <div className="closing__cta-row">
+      <ScrollReveal variant="rise" delay={40}>
+        <h2 className="closing__title" id="closing-title">
+          {closing.titleLine1}
+          <br />
+          {closing.titleLine2}
+          <br />
+          {closing.titleLine3}
+        </h2>
+      </ScrollReveal>
+      <ScrollReveal className="closing__cta-row" variant="fade-up" delay={160}>
         <a href="#" className="btn-dark">
           {closing.bookCta}
         </a>
-      </div>
+      </ScrollReveal>
 
-      <div className="locations-panel" id="locations">
+      <ScrollReveal className="locations-panel" id="locations" variant="fade-up" delay={100}>
         <div className="locations-panel__head">
           <h3 className="locations-panel__title">{locationsCopy.title}</h3>
           <div
@@ -122,7 +125,7 @@ export const Closing = (): ReactElement => {
             </div>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 };

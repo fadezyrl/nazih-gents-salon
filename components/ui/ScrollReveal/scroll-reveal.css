@@ -1,0 +1,140 @@
+.reveal {
+  --reveal-duration: 1.15s;
+  --reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --reveal-distance: 36px;
+  --reveal-delay: 0ms;
+}
+
+.reveal.reveal--ready:not(.is-inview) {
+  opacity: 0;
+  filter: blur(2px);
+  transform: translate3d(0, var(--reveal-distance), 0);
+  transition: none;
+}
+
+.reveal.reveal--ready.is-inview {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity var(--reveal-duration) var(--reveal-ease) var(--reveal-delay),
+    transform var(--reveal-duration) var(--reveal-ease) var(--reveal-delay),
+    filter calc(var(--reveal-duration) * 0.85) var(--reveal-ease)
+      var(--reveal-delay);
+}
+
+.reveal--fade.reveal--ready:not(.is-inview) {
+  transform: none;
+  filter: none;
+}
+
+.reveal--rise {
+  --reveal-distance: 56px;
+}
+
+.reveal--scale.reveal--ready:not(.is-inview) {
+  transform: scale(1.035) translate3d(0, 18px, 0);
+  filter: blur(3px);
+}
+
+.reveal--scale.reveal--ready.is-inview {
+  transform: scale(1) translate3d(0, 0, 0);
+}
+
+/* Mask uses overflow + inner translate so IntersectionObserver
+   still sees a real box (clip-path collapses intersection to 0). */
+.reveal--mask {
+  overflow: hidden;
+}
+
+.reveal--mask.reveal--ready:not(.is-inview) {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+.reveal--mask.reveal--ready:not(.is-inview) > * {
+  transform: translate3d(0, 110%, 0);
+  transition: none;
+}
+
+.reveal--mask.reveal--ready.is-inview > * {
+  transform: translate3d(0, 0, 0);
+  transition: transform 1.25s var(--reveal-ease) var(--reveal-delay);
+}
+
+/* Stagger parents stay visible — only children animate */
+.reveal--stagger.reveal--ready:not(.is-inview),
+.reveal--stagger.reveal--ready.is-inview {
+  opacity: 1;
+  filter: none;
+  transform: none;
+  clip-path: none;
+  transition: none;
+}
+
+/* Staggered children — mark kids with .reveal-child */
+.reveal--stagger.reveal--ready:not(.is-inview) .reveal-child {
+  opacity: 0;
+  filter: blur(2px);
+  transform: translate3d(0, 28px, 0);
+  transition: none;
+}
+
+.reveal--stagger.reveal--ready.is-inview .reveal-child {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 1.05s var(--reveal-ease),
+    transform 1.05s var(--reveal-ease),
+    filter 0.9s var(--reveal-ease);
+}
+
+.reveal--stagger.reveal--ready.is-inview .reveal-child:nth-child(1) {
+  transition-delay: calc(var(--reveal-delay) + 0ms);
+}
+
+.reveal--stagger.reveal--ready.is-inview .reveal-child:nth-child(2) {
+  transition-delay: calc(var(--reveal-delay) + 110ms);
+}
+
+.reveal--stagger.reveal--ready.is-inview .reveal-child:nth-child(3) {
+  transition-delay: calc(var(--reveal-delay) + 220ms);
+}
+
+.reveal--stagger.reveal--ready.is-inview .reveal-child:nth-child(4) {
+  transition-delay: calc(var(--reveal-delay) + 330ms);
+}
+
+.reveal--stagger.reveal--ready.is-inview .reveal-child:nth-child(5) {
+  transition-delay: calc(var(--reveal-delay) + 440ms);
+}
+
+.reveal--stagger.reveal--ready.is-inview .reveal-child:nth-child(6) {
+  transition-delay: calc(var(--reveal-delay) + 550ms);
+}
+
+.reveal--stagger.reveal--ready.is-inview .reveal-child:nth-child(7) {
+  transition-delay: calc(var(--reveal-delay) + 660ms);
+}
+
+.reveal--stagger.reveal--ready.is-inview .reveal-child:nth-child(8) {
+  transition-delay: calc(var(--reveal-delay) + 770ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.reveal--ready,
+  .reveal.reveal--ready:not(.is-inview),
+  .reveal--stagger.reveal--ready:not(.is-inview) .reveal-child,
+  .reveal--stagger.reveal--ready.is-inview .reveal-child,
+  .reveal--mask.reveal--ready:not(.is-inview) > *,
+  .reveal--mask.reveal--ready.is-inview > * {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+}

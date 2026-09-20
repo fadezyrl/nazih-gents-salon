@@ -2,6 +2,7 @@
 
 import type { ReactElement } from "react";
 import { MediaVideo } from "@/components/ui/MediaVideo/MediaVideo";
+import { ScrollReveal } from "@/components/ui/ScrollReveal/ScrollReveal";
 import { siteMedia } from "@/data/media";
 import { useLocale } from "@/context/useLocale";
 import "@/components/sections/Hero/hero.desktop.css";
@@ -13,19 +14,24 @@ export const Hero = (): ReactElement => {
 
   return (
     <section className="hero" aria-label={hero.titleLine1}>
-      <div className="hero__content">
-        <div className="hero__since">{hero.since}</div>
-        <h1 className="hero__title">
+      <ScrollReveal
+        className="hero__content"
+        variant="fade-up"
+        immediate
+        stagger
+      >
+        <div className="hero__since reveal-child">{hero.since}</div>
+        <h1 className="hero__title reveal-child">
           {hero.titleLine1}
           <br />
           {hero.titleLine2}
         </h1>
-        <p className="hero__tagline">
+        <p className="hero__tagline reveal-child">
           {hero.taglineLine1}
           <br />
           {hero.taglineLine2}
         </p>
-        <div className="hero__ctas">
+        <div className="hero__ctas reveal-child">
           <a href="#contact" className="btn-solid">
             {hero.bookCta}
           </a>
@@ -33,17 +39,28 @@ export const Hero = (): ReactElement => {
             {hero.exploreCta}
           </a>
         </div>
-      </div>
-      <MediaVideo
-        src={siteMedia.hero.video}
-        poster={siteMedia.hero.poster}
+      </ScrollReveal>
+      <ScrollReveal
         className="hero__photo"
-        ariaLabel={hero.photoTag}
-      />
-      <div className="hero__scroll">
+        variant="scale"
+        immediate
+        delay={220}
+      >
+        <MediaVideo
+          src={siteMedia.hero.video}
+          poster={siteMedia.hero.poster}
+          ariaLabel={hero.photoTag}
+        />
+      </ScrollReveal>
+      <ScrollReveal
+        className="hero__scroll"
+        variant="fade"
+        immediate
+        delay={520}
+      >
         <span>{hero.scroll}</span>
         <span className="hero__scroll-line" aria-hidden="true" />
-      </div>
+      </ScrollReveal>
     </section>
   );
 };

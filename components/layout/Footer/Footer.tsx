@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactElement } from "react";
+import { ScrollReveal } from "@/components/ui/ScrollReveal/ScrollReveal";
 import { useLocale } from "@/context/useLocale";
 import "@/components/layout/Footer/footer.desktop.css";
 import "@/components/layout/Footer/footer.mobile.css";
@@ -18,12 +19,12 @@ export const Footer = (): ReactElement => {
 
   return (
     <footer>
-      <div className="footer__top">
-        <div>
+      <ScrollReveal className="footer__top" variant="fade-up" stagger>
+        <div className="reveal-child">
           <div className="footer__brand-name">{footer.brand}</div>
           <div className="footer__since">{footer.since}</div>
         </div>
-        <div className="footer__cols">
+        <div className="footer__cols reveal-child">
           <div className="footer__col">
             <div className="footer__col-title">{footer.navTitle}</div>
             {FOOTER_NAV.map((link) => (
@@ -44,12 +45,12 @@ export const Footer = (): ReactElement => {
             <a href="#contact">{footer.contact}</a>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
       <div className="rule rule--light" />
-      <div className="footer__bottom">
+      <ScrollReveal className="footer__bottom" variant="fade" delay={120}>
         <span>{footer.copyright}</span>
         <span>{footer.tagline}</span>
-      </div>
+      </ScrollReveal>
     </footer>
   );
 };

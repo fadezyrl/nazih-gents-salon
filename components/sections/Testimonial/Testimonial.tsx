@@ -8,6 +8,7 @@ import {
   useState,
   type ReactElement,
 } from "react";
+import { ScrollReveal } from "@/components/ui/ScrollReveal/ScrollReveal";
 import { testimonials } from "@/data/testimonials";
 import { useLocale } from "@/context/useLocale";
 import "@/components/sections/Testimonial/testimonial.desktop.css";
@@ -91,14 +92,18 @@ export const Testimonial = (): ReactElement => {
         }
       }}
     >
-      <div
+      <ScrollReveal
         className="testimonial__carousel"
-        ref={viewportRef}
-        role="region"
-        aria-roledescription="carousel"
-        aria-label={copy.sectionLabel}
+        variant="rise"
+        stagger
       >
-        <div className="testimonial__viewport">
+        <div
+          className="testimonial__viewport reveal-child"
+          ref={viewportRef}
+          role="region"
+          aria-roledescription="carousel"
+          aria-label={copy.sectionLabel}
+        >
           {testimonials.map((item, index) => {
             const itemCopy = copy.items[item.id];
             const isActive = index === activeIndex;
@@ -142,7 +147,7 @@ export const Testimonial = (): ReactElement => {
           })}
         </div>
 
-        <div className="testimonial__footer">
+        <div className="testimonial__footer reveal-child">
           <p className="testimonial__status" aria-live="polite">
             {slideStatus}
           </p>
@@ -186,7 +191,7 @@ export const Testimonial = (): ReactElement => {
             </button>
           </div>
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 };

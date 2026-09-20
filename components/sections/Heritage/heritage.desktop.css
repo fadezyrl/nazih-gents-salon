@@ -67,6 +67,10 @@
   background: rgba(33, 43, 52, 0.1);
 }
 
+.heritage__strip .reveal-child {
+  min-width: 0;
+}
+
 .heritage__strip .photo {
   height: 260px;
 }

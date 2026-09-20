@@ -3,6 +3,7 @@
 import type { ReactElement } from "react";
 import { MediaVideo } from "@/components/ui/MediaVideo/MediaVideo";
 import { Photo } from "@/components/ui/Photo/Photo";
+import { ScrollReveal } from "@/components/ui/ScrollReveal/ScrollReveal";
 import { useLocale } from "@/context/useLocale";
 import { services } from "@/data/services";
 import "@/components/sections/Grooming/grooming.desktop.css";
@@ -14,26 +15,32 @@ export const Grooming = (): ReactElement => {
 
   return (
     <section className="grooming" id="grooming" aria-labelledby="grooming-title">
-      <div className="grooming__head">
-        <h2 className="grooming__title" id="grooming-title">
+      <ScrollReveal className="grooming__head" variant="fade-up" stagger>
+        <h2 className="grooming__title reveal-child" id="grooming-title">
           {grooming.titleLine1}
           <br />
           {grooming.titleLine2}
         </h2>
-        <p className="grooming__note">{grooming.note}</p>
-      </div>
+        <p className="grooming__note reveal-child">{grooming.note}</p>
+      </ScrollReveal>
 
-      {services.map((service) => {
+      {services.map((service, index) => {
         const copy = grooming.services[service.id];
         return (
-          <div className="service-row" key={service.id}>
+          <ScrollReveal
+            as="div"
+            className="service-row"
+            key={service.id}
+            variant="fade-up"
+            delay={index * 60}
+          >
             <div className="service-row__inner">
               <span className="service-row__num">{service.number}</span>
               <span className="service-row__name">{copy.name}</span>
               <span className="service-row__desc">
-                {copy.desc.split("\n").map((line, index) => (
+                {copy.desc.split("\n").map((line, lineIndex) => (
                   <span key={line}>
-                    {index > 0 ? <br /> : null}
+                    {lineIndex > 0 ? <br /> : null}
                     {line}
                   </span>
                 ))}
@@ -50,7 +57,7 @@ export const Grooming = (): ReactElement => {
                 )}
               </div>
             </div>
-          </div>
+          </ScrollReveal>
         );
       })}
     </section>
